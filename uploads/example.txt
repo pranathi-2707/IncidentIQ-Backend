@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Menu</title>
+</head>
+
+<body>
+
+    <left>
+        <h1>SPICE GARDEN RESTAURANT</h1>
+        <h3>Authentic Taste • Fresh Ingredients</h3>
+        <hr>
+
+        <h2> RESTAURANT MENU</h2>
+    </left>
+
+    <h2> Starters</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" width="15%">
+        <tr>
+            <th>Item</th>
+            
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>Paneer Tikka</td>
+           
+            <td>₹220</td>
+        </tr>
+
+        <tr>
+            <td>Chicken 65</td>
+       
+            <td>₹260</td>
+        </tr>
+
+        
+    </table>
+
+    <h2> Main Course</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" width="15%">
+        <tr>
+            <th>Item</th>
+           
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>Butter Chicken</td>
+            
+            <td>₹299</td>
+        </tr>
+
+        
+
+        <tr>
+            <td>Chicken Biryani</td>
+            
+            <td>₹280</td>
+        </tr>
+
+        
+    </table>
+
+    <h2> Indian Breads</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" width="15%">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>Butter Naan</td>
+            <td>₹45</td>
+        </tr>
+
+        <tr>
+            <td>Garlic Naan</td>
+            <td>₹60</td>
+        </tr>
+
+        <tr>
+            <td>Tandoori Roti</td>
+            <td>₹30</td>
+        </tr>
+    </table>
+
+    <h2> Desserts</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" width=15%">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>Gulab Jamun</td>
+            <td>₹100</td>
+        </tr>
+
+        <tr>
+            <td>Mango Kulfi</td>
+            <td>₹120</td>
+        </tr>
+    </table>
+
+    <h2> Drinks</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" width="15%">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>Fresh Lime Soda</td>
+            <td>₹70</td>
+        </tr>
+
+        <tr>
+            <td>Mango Lassi</td>
+            <td>₹110</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <left>
+        <hr>
+        <h3>SPICE GARDEN</h3>
+        <p>123 Food Street, Hyderabad</p>
+        <p>Open Daily: 11:00 AM - 11:00 PM</p>
+        <p>Thank you for dining with us! </p>
+    </left>
+
+</body>
+</html>
+
