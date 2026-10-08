@@ -26,27 +26,48 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> createUser(@Valid @RequestBody Userdto user) {
+    public ResponseEntity<Map<String, String>> createUser(
+            @Valid @RequestBody Userdto user) {
+
         service.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "User registered successfully"));
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(Map.of(
+                        "message",
+                        "User registered successfully"
+                ));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@Valid @RequestBody Logindto loginRequest) {
+    public ResponseEntity<Map<String, String>> login(
+            @Valid @RequestBody Logindto loginRequest) {
+
         String result = service.login(loginRequest);
 
-        if ("Login successful".equals(result)) {
-            return ResponseEntity.ok(Map.of("message", result));
-        }
-
         if ("User not found".equals(result)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", result));
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", result));
         }
 
         if ("Invalid password".equals(result)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", result));
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", result));
         }
 
-        return ResponseEntity.badRequest().body(Map.of("message", result));
+        if ("Invalid login request".equals(result)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("message", result));
+        }
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "message", "Login successful",
+                        "token", result
+                )
+        );
     }
 }

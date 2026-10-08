@@ -1,7 +1,6 @@
 package com.incidentiq.service;
 
-import java.util.Objects;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.incidentiq.Model.User;
@@ -13,12 +12,20 @@ import com.incidentiq.repository.UserRepository;
 public class UserService {
 
     private final UserRepository repository;
+    private final JwtService jwtService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository) {
+    public UserService(
+            UserRepository repository,
+            JwtService jwtService) {
+
         this.repository = repository;
+        this.jwtService = jwtService;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public void save(Userdto dto) {
+
         if (dto == null) {
             throw new IllegalArgumentException("User data is required");
         }
@@ -28,7 +35,9 @@ public class UserService {
         String password = normalize(dto.getPassword());
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            throw new IllegalArgumentException("Name, email, and password are required");
+            throw new IllegalArgumentException(
+                    "Name, email, and password are required"
+            );
         }
 
         if (repository.existsByEmail(email)) {
@@ -36,15 +45,21 @@ public class UserService {
         }
 
         User user = new User();
+
         user.setName(name);
         user.setEmail(email);
-        user.setPassword(password);
+
+        // Encrypt password before storing
+        user.setPassword(passwordEncoder.encode(password));
+
+        // All newly registered users are normal users
         user.setRole("USER");
 
         repository.save(user);
     }
 
     public String login(Logindto dto) {
+
         if (dto == null) {
             return "Invalid login request";
         }
@@ -62,11 +77,19 @@ public class UserService {
             return "User not found";
         }
 
-        if (!Objects.equals(user.getPassword(), password)) {
+        // Check entered password against BCrypt password
+        if (!passwordEncoder.matches(
+                password,
+                user.getPassword())) {
+
             return "Invalid password";
         }
 
-        return "Login successful";
+        // Generate JWT containing email and role
+        return jwtService.generateToken(
+                user.getEmail(),
+                user.getRole()
+        );
     }
 
     private String normalize(String value) {
